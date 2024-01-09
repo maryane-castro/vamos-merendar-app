@@ -1,20 +1,32 @@
 import { Text, View, TextInput, TouchableOpacity, ScrollView, FlatList, Alert } from "react-native"
 import { styles } from "./styles"
+import React, { useState } from "react"
 
 import { Participant } from "../components/Participant"
 
 // iniciar no terminal com "npx expo start"
 export function Home() {
+    const [participants, setParticipants] = useState<string[]>([]);
+    const [participantName, setParticipantName] = useState('');
 
-    const participants = ["Rodrigo", "biro","Rodripgo", "bipro","Rodriigo", "birpo", 'uhfs', 'fhsd', 'fsdf']
 
     function handleParticipantAdd(){
-        if(participants.includes("Rodrigo")){
-            Alert.alert("Participante Existe", "Já existe participante com esse nome")
+        if (participantName == ""){
+            Alert.alert("Participante Vazio", "Esse campo está vazio, tente um nome válido!")
+            return
         }
+        if(participants.includes(participantName)) {
+            Alert.alert("Participante Existe", "Já existe participante com esse nome")
+            return
+        }
+
+        setParticipants(prevState => [...prevState, participantName]);
+        setParticipantName('');
     }
 
     function handleParticipantRemove(name: string){
+        
+
         Alert.alert("Remover", `Remover o participante ${name}?`, [
             {
                 text: 'Não',
@@ -22,7 +34,7 @@ export function Home() {
             },
             {
                 text: 'Sim',
-                onPress: () => Alert.alert("Deletado")
+                onPress: () => setParticipants(prevState => prevState.filter(participant => participant !== name))
             }
         ])
     }
@@ -41,6 +53,8 @@ export function Home() {
                 style={styles.input}
                 placeholder="Nome do Participante"
                 placeholderTextColor={"#6b6b6b"}
+                onChangeText={setParticipantName}
+                value={participantName}
                 />
 
                 <TouchableOpacity style={styles.button} onPress={handleParticipantAdd}>
