@@ -1,0 +1,4 @@
+criar projeto
+    npx create-expo-app --template
+baixar fontes
+    npx expo install expo-font @expo-google-fonts/roboto
