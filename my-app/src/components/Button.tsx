@@ -18,7 +18,6 @@ export function Button({ title, ...rest } : Props){
             _pressed={{
                     bg: THEME.colors.red[300]
                 }}
-            onPress={() => console.log({ title })} // só pra testar
         >
             <Text 
                 color={THEME.colors.white}

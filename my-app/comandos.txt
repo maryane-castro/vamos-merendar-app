@@ -9,3 +9,13 @@ native base
 Icones
     npm install --save phosphor-react-native
     npx expo install react-native-svg
+
+Navegação
+    npm install @react-navigation/native
+    npx expo install react-native-screens react-native-safe-area-context
+
+Navegação type stack
+    npm install @react-navigation/native-stack
+
+Data
+    npm install date-fns
