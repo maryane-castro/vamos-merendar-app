@@ -21,6 +21,8 @@ export const THEME = extendTheme({
       red: {
         500: 'rgba(242, 45, 27, 0.90)',
         300: 'rgba(147, 4, 2, 0.80)',
+        200: 'rgba(147, 4, 2, 0.40)',
+
       },
       orange: 'rgba(242, 167, 27, 1)'
     },

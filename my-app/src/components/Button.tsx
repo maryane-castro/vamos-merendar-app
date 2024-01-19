@@ -11,7 +11,7 @@ export function Button({ title, ...rest } : Props){
     return(
         <ButtonNativeBase {...rest}
             w={"full"}
-            marginBottom={6}
+            marginBottom={8}
             h={14}
             bg={THEME.colors.red[500]}
             rounded="full"
