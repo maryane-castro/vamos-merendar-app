@@ -7,34 +7,44 @@ import { Container, HStack, Box, Center } from 'native-base';
 
 type Props = {
   data: string;
-  bgVermelho?: boolean; // Nova propriedade
+  bgVermelho?: boolean;
+  numeros: string[] // Nova propriedade
 };
 
-const Quadrado = ({ data, bgVermelho = false }: Props) => (
-  <TouchableOpacity
-    style={{
-      backgroundColor: bgVermelho ? 'rgba(217, 78, 65, 0.9)' : '#fff',
-      borderRadius: 29,
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: 80,
-      height: 80,
-      borderColor: 'rgba(96, 96, 96, 0.9)',
-      borderWidth: 0.4,
+const Quadrado = ({ data, numeros }: Props) => {
+  // Verifique se o número está na lista de números específicos para definir a cor vermelha
+  const isDiaVermelho = numeros.includes(data);
 
-
-    }}
-  >
-    <Text style={{ 
-      fontSize: 16, 
-      color: bgVermelho ? '#ffffff' : '#000000'
-    }}>{data}</Text>
-  </TouchableOpacity>
-);
+  return (
+    <TouchableOpacity
+      style={{
+        backgroundColor: isDiaVermelho ? 'rgba(217, 78, 65, 0.9)' : '#fff',
+        borderRadius: 29,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 80,
+        height: 80,
+        borderColor: 'rgba(96, 96, 96, 0.9)',
+        borderWidth: 0.4,
+      }}
+    >
+      <Text
+        style={{
+          fontSize: 16,
+          color: isDiaVermelho ? '#ffffff' : '#000000',
+        }}
+      >
+        {data}
+      </Text>
+    </TouchableOpacity>
+  );
+};
 
 export function Calendar() {
   const [currentDate, setCurrentDate] = useState('');
   const [datas, setDatas] = useState<string[]>([]);
+  const [numberList, setNumberList] = useState<string[]>(['22', '20', '19']);
+  
 
   useEffect(() => {
     const getCurrentDate = () => {
@@ -57,6 +67,9 @@ export function Calendar() {
     obterDatas();
   }, []);
 
+
+  
+
   return (
     <Container w={'100%'} alignItems={'center'}>
       <Text
@@ -71,7 +84,7 @@ export function Calendar() {
 
       <HStack space={1}>
         {datas.map((data, index) => (
-          <Quadrado key={index} data={data} bgVermelho={index === 1 } />
+          <Quadrado key={index} data={data} numeros={numberList}/>
         ))}
       </HStack>
     </Container>
